@@ -56,11 +56,27 @@ prepending to the flask/gunicorn command, or via .env file
 
 ## API
 
-All requests should be directed to /participant/<reference_id>
+All requests should be directed to `/participant/<reference_id>`
 - a GET request retrieves metadata for an existing participant
 - a POST request adds metadata for a new participant
 - a PUT request modifies metadata for an existing participant
 - a DELETE request removes a participant record
+
+The following metadata fields are available:
+- `firstname`
+- `lastname`
+- `dob` (in YYYY-mm-dd format)
+- `phone`
+- `address1`
+- `address2`
+- `address3`
+- `town`
+- `postcode`
+- `country`
+
+Participants can be added and modified by supplying a JSON object with the above
+fields as keys, and string values. GET, POST, and PUT requests return the
+corresponding participant's metadata in the response.
 
 
 ## Design choices and trade-offs
