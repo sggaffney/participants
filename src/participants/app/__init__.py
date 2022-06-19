@@ -14,8 +14,10 @@ def create_app(config_name):
     db.init_app(app)
 
     from .api import api as api_blueprint
+    from .api import not_found_error
 
     app.register_blueprint(api_blueprint, url_prefix="/")
+    app.register_error_handler(404, not_found_error)
 
     @app.before_first_request
     def before_first_request():
