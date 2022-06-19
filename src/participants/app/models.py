@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from datetime import datetime
 
 from flask import url_for
 
@@ -19,7 +20,22 @@ class Participant(db.Model):
     postcode = db.Column(db.String(255))
     country = db.Column(db.String(255))
 
-    def to_dict(self):
+    @property
+    def mutable_fields(self) -> set:
+        return {
+            "firstname",
+            "lastname",
+            "dob",
+            "phone",
+            "address1",
+            "address2",
+            "address3",
+            "town",
+            "postcode",
+            "country",
+        }
+
+    def to_dict(self) -> OrderedDict:
         return OrderedDict(
             [
                 ("uri", self.get_uri()),
@@ -36,6 +52,15 @@ class Participant(db.Model):
                 ("country", self.country),
             ]
         )
+
+    def update_from_dict(self, data: dict) -> None:
+        for key in data:
+            if key in self.mutable_fields:
+                if key == "dob":
+                    val = datetime.strptime(data[key], "%Y-%m-%d").date()
+                else:
+                    val = data[key]
+                setattr(self, key, val)
 
     def get_uri(self):
         return url_for("api.lookup", ref_id=self.ref_id, _external=True)
