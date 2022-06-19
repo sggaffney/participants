@@ -26,7 +26,7 @@ class Participant(db.Model):
                 ("ref_id", self.ref_id),
                 ("firstname", self.firstname),
                 ("lastname", self.lastname),
-                ("dob", self.dob.strftime("%Y-%m-%d")),  # '%B %d, %Y' more readable?
+                ("dob", self.dob.strftime("%Y-%m-%d") if self.dob else None),
                 ("phone", self.phone),
                 ("address1", self.address1),
                 ("address2", self.address2),
