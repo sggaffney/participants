@@ -5,7 +5,7 @@ A clinical trial participant registry microservice.
 
 ## Installing the package
 
-- Download the package; create and activate a fresh Python virtual environment using
+- Clone the repository; create and activate a fresh Python virtual environment using
   [venv](https://docs.python.org/3/tutorial/venv.html) or [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html);
   then install the package using `python setup.py develop` (development mode)
   or `python setup.py install`.
