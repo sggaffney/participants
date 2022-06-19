@@ -53,6 +53,16 @@ prepending to the flask/gunicorn command, or via .env file
 - `{DEV_,TEST_,}DATABASE_URL`: set URI for development, testing and production
   databases.
 
+
+## API
+
+All requests should be directed to /participant/<reference_id>
+- a GET request retrieves metadata for an existing participant
+- a POST request adds metadata for a new participant
+- a PUT request modifies metadata for an existing participant
+- a DELETE request removes a participant record
+
+
 ## Design choices and trade-offs
 
 ### The model
@@ -91,3 +101,7 @@ prepending to the flask/gunicorn command, or via .env file
   things simple for both writing and usage, but a better long-term solution might
   be to use a package like `appdirs` to pick an app-specific directory appropriate
   to the OS.
+- GET, POST, and PUT requests return the raw metadata for corresponding
+  participant in the response. An alternative would be to combine fields into a
+  more readable format, e.g. combining address fields and dropping nulls; combining
+  first and last names into a 'full name'.
