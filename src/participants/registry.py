@@ -29,7 +29,7 @@ logger = _create_logger()
 env_path = os.getenv("ENV_PATH", ".env")
 if pathlib.Path(env_path).is_file():
     logger.info("Loading .env from %s", env_path)
-    load_dotenv(env_path, override=True)
+    load_dotenv(env_path, override=False)
 else:
     logger.info("Skipping optional loading of .env file.")
 
